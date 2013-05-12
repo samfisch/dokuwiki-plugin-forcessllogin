@@ -23,17 +23,18 @@ class action_plugin_forcessllogin extends DokuWiki_Action_Plugin {
   }
   function register(&$controller) {
     $controller->register_hook('TPL_ACT_RENDER', 'BEFORE',  $this, 'forcessllogin');
+    $controller->register_hook('ACTION_ACT_PREPROCESS', 'BEFORE',  $this, 'forcessllogin');
   }
   function forcessllogin(&$event, $param) {
     global $ACT;
     if( $ACT != 'login' && $ACT != 'register' ) return;
     if( is_ssl( )) return;
 
-    if( !$this->getConf('splashpage')) {
+    if( $event->name == 'ACTION_ACT_PREPROCESS' && !$this->getConf('splashpage')) {
       send_redirect( 'https://'.$this->host( ).'/'.DOKU_SCRIPT. '?'. $_SERVER['QUERY_STRING'] );
       exit;
-    } else {
-
+    }
+    if( $event->name == 'TPL_ACT_RENDER' ) {
       echo $this->locale_xhtml('splashpage');
       $this->_render( $ACT );
 
