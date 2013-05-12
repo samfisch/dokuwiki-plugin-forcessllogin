@@ -1,0 +1,6 @@
+======= SSL Verschluesselung ======
+
+Die gewünschte Aktion erfordert die Übertragung vertraulicher Daten und wird verschluesselt fortgesetzt.
+ 
+
+

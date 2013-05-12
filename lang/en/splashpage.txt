@@ -1,0 +1,5 @@
+====== SSL Encryption ======
+
+The requested action requires transmission of personal data and has to continue encrypted.
+
+
