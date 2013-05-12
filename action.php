@@ -57,10 +57,10 @@ class action_plugin_forcessllogin extends DokuWiki_Action_Plugin {
       if( strpos( $this->getLang('ca'), '{{name}}' ) !== false ) {
         $form->addElement('<p>'
             .str_replace( '{{name}}', $this->getConf('ca'), $this->getLang('cainfo') )
-            .'</p>'.NL ); } 
+            .'</p>'.NL ); }
       else {
         $form->addElement('<p>'.$this->getLang('cainfo')
-            ." <a href='".$this->getLang('cainfo')."'>".$this->getConf('ca')."</a></p>".NL ); }}
+            ." <a href='".$this->getConf('ca')."'>".$this->getConf('ca')."</a></p>".NL ); }}
 
     $form->addElement(form_makeButton('submit',$act,$this->getLang('submit'),
       array('accesskey'=>'h','title'=>$this->getLang('submittitle'), id=>'focus__this' )));
