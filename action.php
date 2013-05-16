@@ -27,7 +27,7 @@ class action_plugin_forcessllogin extends DokuWiki_Action_Plugin {
   }
   function forcessllogin(&$event, $param) {
     global $ACT;
-    $acts = $this->getConf( 'actions' );
+    $acts = explode(',',$this->getConf('actions'));
     if( !is_array( $acts )) { $acts = array( ); }
     if( !in_array( $ACT, $acts )) return;
     if( is_ssl( )) return;
