@@ -27,7 +27,9 @@ class action_plugin_forcessllogin extends DokuWiki_Action_Plugin {
   }
   function forcessllogin(&$event, $param) {
     global $ACT;
-    if( $ACT != 'login' && $ACT != 'register' ) return;
+    $acts = $this->getConf( 'actions' );
+    if( !is_array( $acts )) { $acts = array( ); }
+    if( !in_array( $ACT, $acts )) return;
     if( is_ssl( )) return;
 
     if( $event->name == 'ACTION_ACT_PREPROCESS' && !$this->getConf('splashpage')) {
