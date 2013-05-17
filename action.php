@@ -44,9 +44,12 @@ class action_plugin_forcessllogin extends DokuWiki_Action_Plugin {
     }
   }
   function _render( $act ) {
+    global $ID;
     $form = new Doku_Form(array('id'=>'forcessllogin1',
-        'action' => 'https://'.$this->host( ).'/'.DOKU_SCRIPT. '?do='.$act,
+        'action' => 'https://'.$this->host( ).'/'.DOKU_SCRIPT,
         'method' => 'get'));
+     $form->addHidden( 'id', $ID );
+     $form->addHidden( 'do', $act );
     if( $this->getConf('cert')) {
       if( strpos( $this->getLang('certinfo'), '{{name}}' ) !== false ) {
         $form->addElement('<p>'
@@ -64,7 +67,7 @@ class action_plugin_forcessllogin extends DokuWiki_Action_Plugin {
         $form->addElement('<p>'.$this->getLang('cainfo')
             ." <a href='".$this->getConf('ca')."'>".$this->getConf('ca')."</a></p>".NL ); }}
 
-    $form->addElement(form_makeButton('submit',$act,$this->getLang('submit'),
+    $form->addElement(form_makeButton('submit','',$this->getLang('submit'),
       array('accesskey'=>'h','title'=>$this->getLang('submittitle'), id=>'focus__this' )));
     $form->printForm();
 
