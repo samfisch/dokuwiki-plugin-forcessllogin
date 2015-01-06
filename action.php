@@ -33,7 +33,7 @@ class action_plugin_forcessllogin extends DokuWiki_Action_Plugin {
     if( is_ssl( )) return;
 
     if( $event->name == 'ACTION_ACT_PREPROCESS' && !$this->getConf('splashpage')) {
-      send_redirect( 'https://'.$this->host( ).'/'.DOKU_SCRIPT. '?'. $_SERVER['QUERY_STRING'] );
+      send_redirect( 'https://'.$this->host( ).DOKU_BASE.DOKU_SCRIPT. '?'. $_SERVER['QUERY_STRING'] );
       exit;
     }
     if( $event->name == 'TPL_ACT_RENDER' ) {
@@ -46,7 +46,7 @@ class action_plugin_forcessllogin extends DokuWiki_Action_Plugin {
   function _render( $act ) {
     global $ID;
     $form = new Doku_Form(array('id'=>'forcessllogin1',
-        'action' => 'https://'.$this->host( ).'/'.DOKU_SCRIPT,
+        'action' => 'https://'.$this->host( ).DOKU_BASE.DOKU_SCRIPT,
         'method' => 'get'));
      $form->addHidden( 'id', $ID );
      $form->addHidden( 'do', $act );
