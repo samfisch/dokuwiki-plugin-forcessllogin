@@ -1,0 +1,3 @@
+====== Biztonságos bejelentkezés ======
+
+A kért művelet személyes adatok továbbításával jár, mely titkosított kapcsolat kiépítését igényli.
