@@ -1,0 +1,5 @@
+====== Szyfrowanie SSL ======
+
+Podejmowana akcja wymaga transmisji wrażliwych danych i będzie kontynuowana poprzez
+kanał szyfrowany.
+
