@@ -37,7 +37,7 @@ class action_plugin_forcessllogin extends DokuWiki_Action_Plugin {
     elseif( !in_array( $ACT, $acts )) return;
 
     if( $event->name == 'ACTION_ACT_PREPROCESS' && !$this->getConf('splashpage')) {
-      send_redirect( 'https://'.$this->host( ).DOKU_BASE.DOKU_SCRIPT. '?'. $_SERVER['QUERY_STRING'] );
+      send_redirect( $this->_path( ));
       exit;
     }
     if( $event->name == 'TPL_ACT_RENDER' ) {
@@ -54,7 +54,7 @@ class action_plugin_forcessllogin extends DokuWiki_Action_Plugin {
   function _render( $act ) {
     global $ID;
     $form = new Doku_Form(array('id'=>'forcessllogin1',
-        'action' => 'https://'.$this->host( ).DOKU_BASE.DOKU_SCRIPT,
+        'action' => $this->_path( ),
         'method' => 'get'));
      $form->addHidden( 'id', $ID );
      $form->addHidden( 'do', $act );
@@ -84,17 +84,9 @@ class action_plugin_forcessllogin extends DokuWiki_Action_Plugin {
       array('accesskey'=>'c','title'=>$this->getLang('canceltitle'))));
     $form->printForm();
   }
-  function host( ) {
-    echo "test: ".getBaseUrl( 'absolute' )."<br>";
-    if(isset($_SERVER['HTTP_HOST'])){
-        $parsed_host = parse_url('http://'.$_SERVER['HTTP_HOST']);
-        $host = $parsed_host['host'];
-    }elseif(isset($_SERVER['SERVER_NAME'])){
-        $parsed_host = parse_url('http://'.$_SERVER['SERVER_NAME']);
-        $host = $parsed_host['host'];
-    }else{
-        $host = php_uname('n');
-    }
-    return $host;
+  function _path( ) {
+    $base = str_replace( 'http://', 'https://', getBaseUrl( 'absolute' ));
+    $path = $_SERVER['REQUEST_URI'];
+    return $base.$path;
   }
 }
