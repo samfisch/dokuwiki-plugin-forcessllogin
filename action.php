@@ -21,7 +21,7 @@ class action_plugin_forcessllogin extends DokuWiki_Action_Plugin {
         'url'    => 'http://www.dokuwiki.org/plugin:forcessllogin',
     );
   }
-  function register(&$controller) {
+  function register(Doku_Event_Handler $controller) {
     $controller->register_hook('TPL_ACT_RENDER', 'BEFORE',  $this, 'forcessllogin');
     $controller->register_hook('ACTION_ACT_PREPROCESS', 'BEFORE',  $this, 'forcessllogin');
   }
