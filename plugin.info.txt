@@ -1,7 +1,7 @@
 base   forcessllogin
 author samuel fischer
 email  sf@notomorrow.de
-date   2016-01-29
+date   2016-09-16
 name   enforce ssl before transmission of personal data
-desc   Enforce SSL for optional actions. Optionally shows a splash page with information on certificate and issuing authority.
+desc   Enforce SSL for selected actions. Optionally show a splash page with information on certificate and issuing authority.
 url    https://www.dokuwiki.org/plugin:forcessllogin
