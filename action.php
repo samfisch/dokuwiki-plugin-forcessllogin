@@ -27,20 +27,28 @@ class action_plugin_forcessllogin extends DokuWiki_Action_Plugin {
   }
   function forcessllogin(&$event, $param) {
     global $ACT;
-    $acts = explode(',',$this->getConf('actions'));
-    if( !is_array( $acts )) { $acts = array( ); }
-    if( !in_array( $ACT, $acts )) return;
     if( is_ssl( )) return;
+
+    $acts = explode(',',$this->getConf('actions'));
+    $intercept = false;
+
+    if( !is_array( $acts )) $acts = array( );
+    if( $ACT == 'denied' && in_array( 'login', $acts )){ $intercept = true; }
+    elseif( !in_array( $ACT, $acts )) return;
 
     if( $event->name == 'ACTION_ACT_PREPROCESS' && !$this->getConf('splashpage')) {
       send_redirect( 'https://'.$this->host( ).DOKU_BASE.DOKU_SCRIPT. '?'. $_SERVER['QUERY_STRING'] );
       exit;
     }
     if( $event->name == 'TPL_ACT_RENDER' ) {
+      $event->preventDefault();
+      if( $intercept ){
+        if( $ACT == 'denied' ) echo p_locale_xhtml('denied');
+        if( !in_array( $ACT, $acts )) return;
+        $ACT = 'login';
+      }
       echo $this->locale_xhtml('splashpage');
       $this->_render( $ACT );
-
-      $event->preventDefault();
     }
   }
   function _render( $act ) {
@@ -77,6 +85,7 @@ class action_plugin_forcessllogin extends DokuWiki_Action_Plugin {
     $form->printForm();
   }
   function host( ) {
+    echo "test: ".getBaseUrl( 'absolute' )."<br>";
     if(isset($_SERVER['HTTP_HOST'])){
         $parsed_host = parse_url('http://'.$_SERVER['HTTP_HOST']);
         $host = $parsed_host['host'];
