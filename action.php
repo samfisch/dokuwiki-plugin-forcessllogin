@@ -86,6 +86,7 @@ class action_plugin_forcessllogin extends DokuWiki_Action_Plugin {
   }
   function _path( ) {
     $base = str_replace( 'http://', 'https://', getBaseUrl( 'absolute' ));
+    $base = rtrim($base, getBaseUrl());  # right trim the dokuwiki directory from the base URL
     $path = $_SERVER['REQUEST_URI'];
     return $base.$path;
   }
