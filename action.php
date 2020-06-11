@@ -76,7 +76,7 @@ class action_plugin_forcessllogin extends DokuWiki_Action_Plugin {
             ." <a href='".$this->getConf('ca')."'>".$this->getConf('ca')."</a></p>".NL ); }}
 
     $form->addElement(form_makeButton('submit','',$this->getLang('submit'),
-      array('accesskey'=>'h','title'=>$this->getLang('submittitle'), id=>'focus__this' )));
+      array('accesskey'=>'h','title'=>$this->getLang('submittitle'), 'id'=>'focus__this' )));
     $form->printForm();
 
     $form = new Doku_Form(array('id'=>'forcessllogin2', 'method' => 'get'));
