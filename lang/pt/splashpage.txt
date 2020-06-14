@@ -1,0 +1,4 @@
+====== Criptografia SSL ======
+
+A ação solicitada exige transmissão de dados pessoais e seguirá criptografada.
+
