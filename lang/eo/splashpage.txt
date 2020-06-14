@@ -1,0 +1,4 @@
+====== Ĉifrado SSL ======
+
+La petita ago postulas elsendon de personaj datumoj kaj sekvos ĉifrita.
+
